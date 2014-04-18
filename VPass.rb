@@ -18,10 +18,10 @@ class VPass
   def get_mechanize_res(auth)
     agent = Mechanize.new
     agent.user_agent_alias = 'Mac Safari'
-    login = agent.get ''
+    login = agent.get 'https://www.smbc-card.com/mem/vps/index.jsp'
     login_form = login.form
-    login_form.field_with(:name=>'inputId').value = auth['id']
-    login_form.field_with(:name=>'inputPassword').value = auth['password']
+    login_form.field_with(:name=>'userid').value = auth['id']
+    login_form.field_with(:name=>'password').value = auth['password']
     mypage = login_form.click_button
     detail_link = mypage.link_with(:text=>'利用明細確認')
     detail = detail_link.click unless detail_link.nil?
