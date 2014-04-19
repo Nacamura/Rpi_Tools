@@ -3,7 +3,7 @@ require 'json'
 
 class NetAnswer
   def call
-    auth_list = open('auth.txt') {|i| JSON.load(i)}
+    auth_list = open('NA_Auth.txt') {|i| JSON.load(i)}
     auth_list.each do |auth|
       csv = get_mechanize_res(auth)
       if(csv)
