@@ -23,5 +23,5 @@ module Clockwork
 
   #Radio jobs
   every(1.week, Radio.new("AandG", "SuzakiNishi", "30", "0100", "SuzakiNishi"), :at=>'Wednesday 00:59')
-  every(1.hour, DropboxUploader.new(".mp3"))
+  every(1.hour, DropboxUploader.new(".mp3"), :at=>'03:00')
 end
