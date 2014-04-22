@@ -16,10 +16,11 @@ module Clockwork
   every(2.minute, (@twitdaemon ||= TwitDaemon.new), :if=>lambda{|t| (10...24) === t.hour})
 
   #tweetbookmark jobs
-  every(1.hour, (TweetBookMark.new), :at=>'**:55')
+  every(1.hour, TweetBookMark.new, :at=>'**:55')
 
   #CreditCardHistory jobs
-  every(1.day, (CreditCardHistory.new), :if=>lambda{|t| t.day == 25})
+  every(1.day, CreditCardHistory.new, :if=>lambda{|t| t.day == 25}, :at=>'05:00')
+  every(1.day, DropboxUploader.new(".csv"), :if=>lambda{|t| t.day == 25}, :at=>'06:00')
 
   #Radio jobs
   every(1.week, Radio.new("AandG", "SuzakiNishi", "30", "0100", "SuzakiNishi"), :at=>'Wednesday 00:59')
