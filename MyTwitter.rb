@@ -29,9 +29,9 @@ class MyTwitter
 
 	def gather_hatebu_urls_without_ng(ng_words)
 		gather_timeline.reject do |t|
+			record_title(t.text.gsub(/\(\d+ users\)/, "").gsub(/ *http:.*/, ""))
 			has_ng_word?(t.text, ng_words)
 		end.map do |t|
-			record_title(t.text.gsub(/\(\d+ users\)/, "").gsub(/ *http:.*/, ""))
 			t.text.slice(/http[^\s]*$/)
 		end
 	end
