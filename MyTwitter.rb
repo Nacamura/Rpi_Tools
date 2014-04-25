@@ -2,6 +2,7 @@ require 'twitter'
 
 class MyTwitter
 	include MyLogger
+	RECORDED_TITLE = './recorded_title.log'
 	def initialize(settings)
 		@logger = get_logger
 		Twitter.configure do |config|
@@ -12,7 +13,7 @@ class MyTwitter
 		end
 		@target_user = settings["target_user"]
 		@count = settings["count"]
-		@recorded_title = open('./recorded_title.txt', 'r') do |io|
+		@recorded_title = open(RECORDED_TITLE, 'r') do |io|
 			io.readlines
 		end.map(&:strip)
 	end
@@ -51,7 +52,7 @@ class MyTwitter
 	end
 
 	def dump_recorded
-		open('./recorded_title.txt', 'w') do |io|
+		open(RECORDED_TITLE, 'w') do |io|
 			@recorded_title.each do |title|
 				io.puts title
 			end
