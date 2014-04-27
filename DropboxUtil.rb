@@ -12,6 +12,6 @@ class DropboxUtil
 
 	def upload(cloud_path, local_path, filename)
 		file = open(local_path + filename)
-		@client.put_file(cloud_path + filename, file)
+		@client.put_file(cloud_path + filename, file, true)
 	end
 end
