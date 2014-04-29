@@ -3,22 +3,15 @@ class JorudanSearch
   require 'mechanize'
   Route = Struct.new(:name, :time, :duration, :exchange, :fare)
 
-  def routes(from_st, to_st, route_st, gap_seconds)
-    parse_to_routes(get_mechanize_res(from_st, to_st, route_st, gap_seconds))
+  def route_home
+    get_routes_with_specific("六本木一丁目", "ひばりヶ丘（東京）", "小竹向原", 300)
   end
 
-  def routes_specific(from_st, to_st, route_st, gap_seconds)
-    routes(from_st, to_st, route_st, gap_seconds) << get_specific_route(from_st, to_st, route_st, gap_seconds)
-  end
-
-  def get_specific_route(from_st, to_st, route_st, gap_seconds)
-    route_stations = []
-    get_mechanize_res(from_st, to_st, route_st, gap_seconds).search("td").each do |td|
-      next if (td.attributes["class"].nil?) || (td.attributes["class"].value != "nm")
-      route_stations << td.text
-      break if td.text == to_st
-    end
-    route_stations
+  def get_routes_with_specific(from_st, to_st, route_st, gap_seconds)
+    res = get_mechanize_res(from_st, to_st, route_st, gap_seconds)
+    routes = parse_to_routes(res)
+    specific_route = get_specific_route(res, to_st)
+    (routes[0].time) + ", " + specific_route
   end
 
   def get_mechanize_res(from_st, to_st, route_st, gap_seconds)
@@ -52,13 +45,14 @@ class JorudanSearch
     routes
   end
 
-  def route_home
-    r = routes_specific("六本木一丁目", "ひばりヶ丘（東京）", "小竹向原", 300)
-    result = r[0].time
-    r[-1].each do |station|
-      result += ("," + station)
+  def get_specific_route(mechanize_res, to_st)
+    route_stations = []
+    mechanize_res.search("td").each do |td|
+      next if (td.attributes["class"].nil?) || (td.attributes["class"].value != "nm")
+      route_stations << td.text
+      break if td.text == to_st
     end
-    result
+    route_stations.join(", ")
   end
 
 end
