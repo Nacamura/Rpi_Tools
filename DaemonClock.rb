@@ -13,7 +13,7 @@ module Clockwork
   end
 
   #Log Upload jobs
-  every(1.day, DropboxUploader.new(".log", "non_archive"), :at=>'06:30')
+  every(1.day, DropboxUploader.new(".log", "non_archive"), :at=>['06:00', '12:00', '18:00'])
 
   #TrainSearch jobs
   every(2.minute, (@twitdaemon ||= TwitDaemon.new), :if=>lambda{|t| (8...24) === t.hour})
@@ -23,7 +23,7 @@ module Clockwork
 
   #CreditCardHistory jobs
   every(1.day, CreditCardHistory.new, :if=>lambda{|t| t.day == 25}, :at=>'05:00')
-  every(1.day, DropboxUploader.new(".csv", "CCH_archive"), :if=>lambda{|t| t.day == 25}, :at=>'06:00')
+  every(1.day, DropboxUploader.new(".csv", "CCH_archive"), :if=>lambda{|t| t.day == 25}, :at=>'07:00')
 
   #Radio jobs
   every(1.week, Radio.new("Radiko", "TBS", "120", "0100", "Baka"), :at=>'Tuesday 00:59')
