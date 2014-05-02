@@ -7,13 +7,13 @@ class MyGmail
 		@gmail = Gmail.new(@settings['email'], @settings['email_pw'])
 	end
 
-	def send
+	def send(title, content)
 		target = @settings["target_email"]
 		@gmail.deliver do
 			to target
-			subject 'Test Mail'
+			subject title
 			text_part do
-				body 'テスト送信しています'
+				body content
 			end
 		end
   end
