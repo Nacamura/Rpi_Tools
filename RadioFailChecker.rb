@@ -10,6 +10,6 @@ class RadioFailChecker
 				MyGmail.new.send('RadioAlert', '/tmp/に0バイトのファイルがあります')
 			end
 		end
-  end
+	end
   
 end
