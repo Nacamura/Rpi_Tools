@@ -7,7 +7,7 @@ class RadioFailChecker
 		Dir.foreach(PATH) do |file|
 			filepath = PATH + file
 			if (FileTest.size(filepath) == 0)
-				MyGmail.new.send('RadioAlert', '/tmp/に0バイトのファイルがあります')
+				MyGmail.new.send('RadioAlert', '0バイトのファイルがあります')
 			end
 		end
 	end
