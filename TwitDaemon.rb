@@ -8,7 +8,6 @@ class TwitDaemon
   include MyLogger
 
   @twitcom
-  @trainsearch
 
   def call
     @twitcom ||= TwitCommunicator.new( MyJSON.load_json("settings.txt") )
@@ -30,9 +29,7 @@ class TwitDaemon
     lines.each do |l|
       case l.strip
       when "home"
-        @trainsearch ||= TrainSearch.new
-        text = @trainsearch.route_home
-        @twitcom.create_direct_message(text)
+        @twitcom.create_direct_message(TrainSearch.new.route_home)
       when "radio"
         Radio.temp_schedule(lines)
       end
