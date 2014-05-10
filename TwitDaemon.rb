@@ -13,10 +13,7 @@ class TwitDaemon
     @twitcom ||= TwitCommunicator.new( MyJSON.load_json("settings.txt") )
     dms = @twitcom.gather_new_direct_messages
     dms.each do |dm|
-      lines = []
-      dm.text.lines do |l|
-        lines << l
-      end
+      lines = dm.text.split("\n")
       if(lines[0].strip != "pi")
         next
       else
