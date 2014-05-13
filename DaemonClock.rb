@@ -23,8 +23,8 @@ module Clockwork
   every(1.hour, TweetBookMark.new, :at=>'**:55')
 
   #CreditCardHistory jobs
-  every(1.day, CreditCardHistory.new, :if=>lambda{|t| t.day == 25}, :at=>'05:00')
-  every(1.day, DropboxUploader.new(".csv", "CCH_archive"), :if=>lambda{|t| t.day == 25}, :at=>'07:00')
+  every(1.day, CreditCardHistory.new, :if=>lambda{|t| t.day == 20}, :at=>'05:00')
+  every(1.day, DropboxUploader.new(".csv", "CCH_archive"), :if=>lambda{|t| t.day == 20}, :at=>'07:00')
 
   #Radio jobs
   every(1.week, Radio.new("Radiko", "TBS", "120", "0100", "Baka"), :at=>'Tuesday 00:59')
