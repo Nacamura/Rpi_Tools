@@ -17,7 +17,7 @@ module Clockwork
   every(1.hour, DropboxUploader.new(".log", "non_archive"), :at=>['06:00', '12:00', '18:00'])
 
   #TrainSearch jobs
-  every(2.minute, (@twitdaemon ||= TwitDaemon.new), :if=>lambda{|t| (10...22) === t.hour})
+  every(2.minute, (@twitdaemon ||= TwitDaemon.new), :if=>lambda{|t| (15...20) === t.hour})
 
   #tweetbookmark jobs
   every(1.hour, TweetBookMark.new, :at=>'**:55')
