@@ -12,7 +12,7 @@ class NanacoDepoChecker
   def get_mechanize_res(auth)
     agent = Mechanize.new
     agent.user_agent_alias = 'Mac Safari'
-    login = agent.get ''
+    login = agent.get 'https://www.nanaco-net.jp/pc/emServlet'
     login_form = login.form
     login_form.field_with(:name=>'id').value = auth['id']
     login_form.field_with(:name=>'password').value = auth['password']
