@@ -1,3 +1,5 @@
+require 'mechanize'
+require 'json'
 load 'MyGmail.rb'
 
 class NanacoDepoChecker
@@ -17,16 +19,12 @@ class NanacoDepoChecker
     login_form.field_with(:name=>'XCID').value = auth['id']
     login_form.field_with(:name=>'SECURITY_CD').value = auth['password']
     mypage = login_form.click_button
+    mypage.links[2].click
+    mypage
   end
 
   def get_deposit(mechanize_res)
-    deposit = 1000000
-    mechanize_res.search('tr').each do |tr|
-      if(tr.some_extraction == 'money')
-        deposit = money_gsub
-      end
-    end
-    deposit
+    mechanize_res.search('p')[5].text.gsub(',', '').gsub('円', '').to_i
   end
 
 end
