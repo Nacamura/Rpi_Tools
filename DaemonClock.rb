@@ -5,6 +5,7 @@ load 'CreditCardHistory.rb'
 load 'Radio.rb'
 load 'DropboxUploader.rb'
 load 'RadioFailChecker.rb'
+load 'NanacoDepoChecker.rb'
 
 @twitdaemon
 
@@ -25,6 +26,9 @@ module Clockwork
   #CreditCardHistory jobs
   every(1.day, CreditCardHistory.new, :if=>lambda{|t| t.day == 20}, :at=>'05:00')
   every(1.day, DropboxUploader.new(".csv", "CCH_archive"), :if=>lambda{|t| t.day == 20}, :at=>'07:00')
+
+  #NanacoDepoChecker jobs
+  every(1.day, NanacoDepoChecker.new, :at=>'20:00')
 
   #Radio jobs
   every(1.week, Radio.new("Radiko", "TBS", "120", "0100", "Baka"), :at=>'Tuesday 00:59')
