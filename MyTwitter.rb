@@ -33,7 +33,7 @@ class MyTwitter
 			record_title(t.text.gsub(/\(\d+ users\)/, "").gsub(/ *http:.*/, ""))
 			has_ng_word?(t.text, ng_words)
 		end.map do |t|
-			t.text.slice(/http[^\s]*$/)
+			t.text.slice(/http[^\s]*/)
 		end
 	end
 
