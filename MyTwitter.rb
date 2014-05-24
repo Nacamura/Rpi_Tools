@@ -22,12 +22,6 @@ class MyTwitter
 		Twitter.user_timeline(@target_user, options={:count => @count})
 	end
 
-	def gather_hatebu_urls
-		gather_timeline.map do |t|
-			t.text.slice(/http[^\s]*$/)
-		end
-	end
-
 	def gather_hatebu_urls_without_ng(ng_words)
 		gather_timeline.reject do |t|
 			record_title(t.text.gsub(/\(\d+ users\)/, "").gsub(/ *http:.*/, ""))
