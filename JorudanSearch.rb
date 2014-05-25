@@ -4,14 +4,14 @@ class JorudanSearch
   Route = Struct.new(:name, :time, :duration, :exchange, :fare)
 
   def route_home
-    get_routes_with_specific("六本木一丁目", "ひばりヶ丘（東京）", "小竹向原", 300)
+    get_route_with_specific("六本木一丁目", "ひばりヶ丘（東京）", "小竹向原", 300)
   end
 
-  def get_routes_with_specific(from_st, to_st, route_st, gap_seconds)
+  def get_route_with_specific(from_st, to_st, route_st, gap_seconds)
     res = get_mechanize_res(from_st, to_st, route_st, gap_seconds)
-    routes = parse_to_routes(res)
+    route = parse_to_route(res)
     specific_route = get_specific_route(res, to_st)
-    (routes[0].time) + ", " + specific_route
+    route.time + ", " + specific_route
   end
 
   def get_mechanize_res(from_st, to_st, route_st, gap_seconds)
@@ -43,6 +43,11 @@ class JorudanSearch
       routes << Route.new(tds[0].text, tds[1].text, tds[2].text, tds[3].text, tds[4].text)
     end
     routes
+  end
+
+  def parse_to_route(mechanize_res)
+    tds = mechanize_res.search("tr")[0].search("td")
+    Route.new(tds[0].text, tds[1].text, tds[2].text, tds[3].text, tds[4].text)
   end
 
   def get_specific_route(mechanize_res, to_st)
