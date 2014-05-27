@@ -35,16 +35,6 @@ class JorudanSearch
     form.click_button
   end
 
-  def parse_to_routes(mechanize_res)
-    routes = []
-    mechanize_res.search("tr").each do |tr|
-      tds = tr.search("td")
-      if(tds.count != 6) then break end
-      routes << Route.new(tds[0].text, tds[1].text, tds[2].text, tds[3].text, tds[4].text)
-    end
-    routes
-  end
-
   def parse_to_route(mechanize_res)
     tds = mechanize_res.search("tr")[0].search("td")
     Route.new(tds[0].text, tds[1].text, tds[2].text, tds[3].text, tds[4].text)
