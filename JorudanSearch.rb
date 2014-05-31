@@ -4,7 +4,9 @@ class JorudanSearch
   Route = Struct.new(:name, :time, :duration, :exchange, :fare)
 
   def route_home
-    get_route_with_specific("六本木一丁目", "ひばりヶ丘（東京）", "小竹向原", 300)
+    get_route_with_specific("六本木一丁目", "ひばりヶ丘（東京）", "小竹向原", 300) +
+    "\n" +
+    get_route_with_specific("六本木一丁目", "ひばりヶ丘（東京）", "小竹向原", 480)
   end
 
   def get_route_with_specific(from_st, to_st, route_st, gap_seconds)
