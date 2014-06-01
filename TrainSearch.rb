@@ -2,7 +2,7 @@ load 'JorudanSearch.rb'
 
 class TrainSearch
 
-  def route_home
+  def route_text
     JorudanSearch.new.route_home
   end
 

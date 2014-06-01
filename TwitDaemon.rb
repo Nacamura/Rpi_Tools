@@ -26,7 +26,7 @@ class TwitDaemon
     lines.each do |l|
       case l.strip
       when "home"
-        @twitcom.create_direct_message(TrainSearch.new.route_home)
+        @twitcom.create_direct_message(TrainSearch.new.route_text)
       when "radio"
         Radio.temp_schedule(lines)
       end
