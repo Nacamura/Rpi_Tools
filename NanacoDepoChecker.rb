@@ -6,7 +6,7 @@ class NanacoDepoChecker
 
   def call
     auth = open('Nanaco_Auth.txt') {|i| JSON.load(i)}
-    if(get_deposit(get_mechanize_res(auth)) < 1000)
+    if(get_deposit(get_mechanize_res(auth)) < 1500)
       MyGmail.new.send('NanacoDeposit', '残高が少なくなっています')
     end
   end
