@@ -3,10 +3,13 @@ require 'json'
 load 'MyGmail.rb'
 
 class NanacoDepoChecker
+  include MyLogger
 
   def call
     auth = open('Nanaco_Auth.txt') {|i| JSON.load(i)}
-    if(get_deposit(get_mechanize_res(auth)) < 1500)
+    current_deposit = get_deposit(get_mechanize_res(auth))
+    get_logger.debug("Nanaco残高:#{current_deposit}円")
+    if(current_deposit < 1500)
       MyGmail.new.send('NanacoDeposit', '残高が少なくなっています')
     end
   end
