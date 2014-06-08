@@ -10,8 +10,7 @@ class Radio
 	def call
 		running = `ps -ef |grep #{@file_name} |grep -v grep`
 		return if running != ""
-		shell = get_shell_name
-		system("#{shell} #{@channel} #{@duration} #{@start_time} #{@file_name} &")
+		system("#{get_shell_name} #{@channel} #{@duration} #{@start_time} #{@file_name} &")
 	end
 
 	def get_shell_name
