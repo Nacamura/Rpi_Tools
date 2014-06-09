@@ -17,8 +17,7 @@ class Instapaper
 	def add_all(urls)
 		@logger.debug("add " + urls.length.to_s + " URLs")
 		urls.each do |url|
-			res = add(url)
-			if res != "201" then @logger.warn(url + " : " + res) end
+			add(url)
 			sleep 1
 		end
 	end
