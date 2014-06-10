@@ -1,0 +1,2 @@
+class MyFitbit
+end
