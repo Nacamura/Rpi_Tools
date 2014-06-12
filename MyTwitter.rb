@@ -37,7 +37,7 @@ class MyTwitter
 			has_ng_word = (text.match(ng_word) != nil)
 			break if has_ng_word
 		end
-		@logger.debug("skip:" + text) if has_ng_word
+		@logger.info("skip:" + text) if has_ng_word
 		has_ng_word
 	end
 
