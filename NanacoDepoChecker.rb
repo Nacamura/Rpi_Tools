@@ -9,7 +9,7 @@ class NanacoDepoChecker
     auth = open('Nanaco_Auth.txt') {|i| JSON.load(i)}
     current_deposit = get_deposit(get_mechanize_res(auth))
     get_logger.info(deposit_message = "Nanaco残高:#{current_deposit}円")
-    if(current_deposit < 1500)
+    if(current_deposit < 2000)
       MyGmail.new.send('NanacoDeposit', deposit_message)
     end
   end
