@@ -4,7 +4,6 @@ class MyTwitter
 	include MyLogger
 	RECORDED_TITLE = './recorded_title.log'
 	def initialize(settings)
-		@logger = get_logger
 		Twitter.configure do |config|
 			config.consumer_key = settings["consumer_key"]
 			config.consumer_secret = settings["consumer_secret"]
@@ -37,7 +36,7 @@ class MyTwitter
 			has_ng_word = (text.match(ng_word) != nil)
 			break if has_ng_word
 		end
-		@logger.info("skip:" + text) if has_ng_word
+		get_logger.info("skip:" + text) if has_ng_word
 		has_ng_word
 	end
 
