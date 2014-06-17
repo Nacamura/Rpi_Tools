@@ -3,6 +3,7 @@ load 'MyLogger.rb'
 load 'TwitCommunicator.rb'
 load 'TrainSearch.rb'
 load 'Radio.rb'
+load 'MyGmail.rb'
 
 class TwitDaemon
   include MyLogger
@@ -26,7 +27,8 @@ class TwitDaemon
     lines.each do |l|
       case l.strip
       when "home"
-        @twitcom.create_direct_message(TrainSearch.new.route_text)
+        MyGmail.new.send('TrainSearch', message = TrainSearch.new.route_text)
+        @twitcom.create_direct_message(message)
       when "radio"
         Radio.temp_schedule(lines)
       end
