@@ -27,8 +27,7 @@ class TwitDaemon
     lines.each do |l|
       case l.strip
       when "home"
-        MyGmail.new.send('TrainSearch', message = TrainSearch.new.route_text)
-        @twitcom.create_direct_message(message)
+        MyGmail.new.send('TrainSearch', TrainSearch.new.route_text)
       when "radio"
         Radio.temp_schedule(lines)
       end
