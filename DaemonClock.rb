@@ -20,8 +20,8 @@ module Clockwork
 
   every(1.hour, TweetBookMark.new, :at=>'**:55')
 
-  every(1.day, CreditCardHistory.new, :if=>lambda{|t| t.day == 20}, :at=>'05:00')
-  every(1.day, DropboxUploader.new(".csv", "CCH_archive"), :if=>lambda{|t| t.day == 20}, :at=>'07:00')
+  every(1.day, CreditCardHistory.new, :if=>lambda{|t| t.day == 20}, :at=>'03:00')
+  every(1.day, DropboxUploader.new(".csv", "CCH_archive"), :if=>lambda{|t| t.day == 20}, :at=>'03:30')
 
   every(1.day, NanacoDepoChecker.new, :at=>'20:00')
 
