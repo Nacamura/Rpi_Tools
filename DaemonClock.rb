@@ -27,7 +27,6 @@ module Clockwork
 
   every(1.week, Radio.new("Radiko", "TBS", "120", "0100", "Baka"), :at=>'Tuesday 00:59')
   every(1.week, Radio.new("AandG", "Anigera", "90", "2100", "Anigera"), :at=>'Thursday 20:59')
-  every(1.week, Radio.new("AandG", "AoiSaori", "30", "2330", "AoiSaori"), :at=>'Wednesday 23:29')
   every(1.hour, DropboxUploader.new(".mp3", "mp3_archive"), :at=>['06:00', '22:15'])
 
   every(1.day, RadioFailChecker.new, :at=>'22:30')
