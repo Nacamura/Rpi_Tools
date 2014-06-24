@@ -1,18 +1,22 @@
+require 'twitter'
 load 'MyJSON.rb'
-load 'MyLogger.rb'
-load 'TwitCommunicator.rb'
 load 'TrainSearch.rb'
 load 'Radio.rb'
 load 'MyGmail.rb'
 
 class TwitDaemon
-  include MyLogger
-
-  @twitcom
+  def initialize
+    settings = MyJSON.load_json("settings.txt")
+    Twitter.configure do |config|
+      config.consumer_key = settings["consumer_key"]
+      config.consumer_secret = settings["consumer_secret"]
+      config.oauth_token = settings["access_token"]
+      config.oauth_token_secret = settings["access_token_secret"]
+    end
+  end
 
   def call
-    @twitcom ||= TwitCommunicator.new( MyJSON.load_json("settings.txt") )
-    dms = @twitcom.gather_new_direct_messages
+    dms = Twitter.direct_messages
     dms.each do |dm|
       lines = dm.text.split("\n")
       if(lines[0].strip != "pi")
