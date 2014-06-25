@@ -15,7 +15,7 @@ class Instapaper
 	def add_all(urls)
 		urls.each do |url|
 			add(url)
-			sleep 1
+			sleep 3
 		end
 	end
 
