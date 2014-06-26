@@ -1,7 +1,13 @@
+load 'MyJSON.rb'
+
 class JorudanSearch
 
   require 'mechanize'
   Route = Struct.new(:name, :time, :duration, :exchange, :fare)
+
+  def get_params
+    MyJSON.load_json("JorudanParams.txt")
+  end
 
   def route_home
     get_route_with_specific("六本木一丁目", "ひばりヶ丘（東京）", "小竹向原", 300) +
