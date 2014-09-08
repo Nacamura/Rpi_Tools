@@ -13,6 +13,7 @@ class DropboxUploader
 			if(File.extname(file) == @extname)
 				@dropbox.upload('/', './', file)
 				FileUtils.mv(file, @archive_dir) if (Dir.exists? @archive_dir)
+				FileUtils.rm(file) if ("delete" == @archive_dir)
 			end
 		end
 	end
